@@ -1,84 +1,201 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const slogans = [
-  "Turn chats into apps",
-  "Prompt. Ship. Repeat.",
-  "Build anything from a chat",
-  "Ideas → Apps, instantly",
-  "From zero to MVP in minutes",
-  "Your cofounder in the command line",
-  "Draft, iterate, deploy",
-  "Ship faster than you can type",
-  "Design in text, deliver in code",
-  "Dream it. Prompt it. Run it.",
-  "Chat-native app building",
-  "From prompt to product",
-  "One prompt, infinite apps",
-  "Stop scaffolding. Start shipping.",
-  "Prototype at the speed of thought",
-  "Make conversations executable"
+const styles = [
+  { name: 'Afrobeat', color: 'from-orange-500 to-red-600' },
+  { name: 'Hip-Hop', color: 'from-purple-500 to-pink-600' },
+  { name: 'Gospel', color: 'from-yellow-400 to-orange-500' },
+  { name: 'Anime', color: 'from-blue-500 to-cyan-400' },
+  { name: 'Sci-Fi', color: 'from-indigo-600 to-purple-700' },
+  { name: 'Fantasy', color: 'from-green-500 to-emerald-600' },
+];
+
+const features = [
+  { icon: '🎵', title: 'AI Audio Analysis', desc: 'Detects emotion, rhythm, and mood from your music' },
+  { icon: '🎭', title: 'Ultra-Realistic 3D', desc: 'Photorealistic characters, environments, and lighting' },
+  { icon: '🎬', title: 'Cinematic Shots', desc: 'Drone sweeps, slow-mo, close-ups, action sequences' },
+  { icon: '💋', title: 'Perfect Lip-Sync', desc: 'Natural facial expressions synced to vocals' },
+  { icon: '🎨', title: 'Full Customization', desc: 'Characters, outfits, scenes, camera angles' },
+  { icon: '⚡', title: '4K+ Export', desc: 'Studio-quality videos ready for YouTube & TikTok' },
 ];
 
 export default function Landing() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % slogans.length);
-        setIsVisible(true);
-      }, 400);
-    }, 2800);
-
-    return () => clearInterval(interval);
-  }, []);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
+  };
 
   return (
-    <div className="relative h-[100dvh] w-full overflow-hidden bg-black text-white">
-      {/* Enhanced animated aurora background layers */}
-      <div className="absolute inset-0 bg-aurora-layer-1" />
-      <div className="absolute inset-0 bg-aurora-layer-2" />
-      <div className="absolute inset-0 bg-aurora-layer-3" />
-      
-      {/* Floating particles overlay */}
-      <div className="absolute inset-0 bg-particles" />
-      
-      {/* Main content - centered */}
-      <main className="relative z-10 h-full flex flex-col items-center justify-center px-6">
-        <h1 className="text-center text-[clamp(28px,6vw,64px)] font-medium tracking-tight mb-4">
-          Turn Chats into Apps
-        </h1>
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-blue-900/20" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,0,255,0.1),transparent_50%)]" />
         
-        {/* Rotating slogans */}
-        <div className="mt-4 h-8 md:h-10 overflow-hidden flex items-center justify-center">
-          <span
-            className={`inline-block text-center text-[clamp(18px,3vw,32px)] font-light transition-all duration-[400ms] ease-in-out ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
-            }`}
-          >
-            {slogans[currentIndex]}
-          </span>
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent animate-pulse">
+            Ultra-Realistic 3D
+            <br />
+            Music Video Generator
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+            Transform your lyrics and audio into cinematic, studio-quality 3D animated music videos powered by AI
+          </p>
+          
+          {/* Demo Video Placeholder */}
+          <div className="relative w-full max-w-4xl mx-auto mb-12 rounded-2xl overflow-hidden shadow-2xl border border-purple-500/30">
+            <div className="aspect-video bg-gradient-to-br from-purple-900/40 to-blue-900/40 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm">
+                  <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                <p className="text-gray-400">Watch Demo Video</p>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA */}
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto mb-4">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+              className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm focus:outline-none focus:border-purple-500 transition-colors"
+            />
+            <button
+              type="submit"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold hover:scale-105 transition-transform shadow-lg"
+            >
+              {submitted ? '✓ Joined!' : 'Join Waitlist'}
+            </button>
+          </form>
+          <p className="text-sm text-gray-500">Be the first to create studio-quality music videos with AI</p>
         </div>
-      </main>
-      
-      {/* Start Prompting arrow pointing left - bottom left */}
-      <div className="absolute left-6 md:left-8 bottom-[5%] z-20 flex items-center gap-3 arrow-point-left">
-        <div className="flex items-center gap-2 text-white/80 font-medium text-sm md:text-base">
-          <svg 
-            className="w-5 h-5 md:w-6 md:h-6 animate-bounce-horizontal" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-          <span>Start prompting</span>
+      </section>
+
+      {/* Features Grid */}
+      <section className="py-20 px-6 bg-gradient-to-b from-black to-purple-950/20">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+            Everything You Need to Create
+            <span className="block bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Professional Music Videos
+            </span>
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {features.map((feature, i) => (
+              <div
+                key={i}
+                className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all hover:scale-105"
+              >
+                <div className="text-5xl mb-4">{feature.icon}</div>
+                <h3 className="text-2xl font-bold mb-3">{feature.title}</h3>
+                <p className="text-gray-400">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Style Presets */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
+            Choose Your Style
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {styles.map((style, i) => (
+              <div
+                key={i}
+                className="group relative h-64 rounded-2xl overflow-hidden cursor-pointer"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${style.color} opacity-80 group-hover:opacity-100 transition-opacity`} />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <h3 className="text-3xl font-bold group-hover:scale-110 transition-transform">
+                    {style.name}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Use Cases */}
+      <section className="py-20 px-6 bg-gradient-to-b from-purple-950/20 to-black">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12">
+            Perfect For
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="p-8">
+              <div className="text-5xl mb-4">🎤</div>
+              <h3 className="text-2xl font-bold mb-3">Artists</h3>
+              <p className="text-gray-400">Create stunning visuals for your music without expensive studios</p>
+            </div>
+            <div className="p-8">
+              <div className="text-5xl mb-4">📱</div>
+              <h3 className="text-2xl font-bold mb-3">Content Creators</h3>
+              <p className="text-gray-400">Stand out on YouTube, TikTok, and Instagram with cinematic videos</p>
+            </div>
+            <div className="p-8">
+              <div className="text-5xl mb-4">🎼</div>
+              <h3 className="text-2xl font-bold mb-3">Music Labels</h3>
+              <p className="text-gray-400">Produce high-quality music videos at scale for your roster</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+            Ready to Create Magic?
+          </h2>
+          <p className="text-xl text-gray-300 mb-12">
+            Join the waitlist and be among the first to turn your music into cinematic 3D experiences
+          </p>
+          
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+              className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm focus:outline-none focus:border-purple-500 transition-colors"
+            />
+            <button
+              type="submit"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold hover:scale-105 transition-transform shadow-lg"
+            >
+              {submitted ? '✓ Joined!' : 'Get Early Access'}
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12 px-6 border-t border-white/10">
+        <div className="max-w-7xl mx-auto text-center text-gray-500">
+          <p>© 2024 Ultra-Realistic 3D Music Video Generator. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
+
