@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 const styles = [
   { name: 'Afrobeat', color: 'from-orange-500 to-red-600' },
@@ -63,23 +64,31 @@ export default function Landing() {
           </div>
 
           {/* CTA */}
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto mb-4">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm focus:outline-none focus:border-purple-500 transition-colors"
-            />
-            <button
-              type="submit"
-              className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold hover:scale-105 transition-transform shadow-lg"
+          <div className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto mb-4">
+            <Link
+              href="/dashboard"
+              className="px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 font-semibold hover:scale-105 transition-transform shadow-lg text-center"
             >
-              {submitted ? '✓ Joined!' : 'Join Waitlist'}
-            </button>
-          </form>
-          <p className="text-sm text-gray-500">Be the first to create studio-quality music videos with AI</p>
+              🚀 Start Creating Now
+            </Link>
+            <form onSubmit={handleSubmit} className="flex gap-2 flex-1">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                required
+                className="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm focus:outline-none focus:border-purple-500 transition-colors"
+              />
+              <button
+                type="submit"
+                className="px-6 py-4 rounded-full bg-slate-800 hover:bg-slate-700 font-semibold transition-colors"
+              >
+                {submitted ? '✓' : 'Waitlist'}
+              </button>
+            </form>
+          </div>
+          <p className="text-sm text-gray-500">Try the platform now or join the waitlist for updates</p>
         </div>
       </section>
 
@@ -198,4 +207,6 @@ export default function Landing() {
     </div>
   );
 }
+
+
 

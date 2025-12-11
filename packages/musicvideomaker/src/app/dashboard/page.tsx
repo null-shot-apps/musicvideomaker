@@ -46,7 +46,7 @@ export default function Dashboard() {
         {/* Create New Project Button */}
         <div className="mb-12">
           <Link
-            href="/create"
+            href="/project/new"
             className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,9 +94,12 @@ export default function Dashboard() {
                   
                   {/* Actions */}
                   <div className="mt-4 flex gap-2">
-                    <button className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm font-medium">
-                      View
-                    </button>
+                    <Link 
+                      href={`/project/${project.id}`}
+                      className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition text-sm font-medium text-center"
+                    >
+                      {project.status === 'completed' ? 'View' : 'Continue'}
+                    </Link>
                     <button className="px-4 py-2 bg-white/5 text-white rounded-lg hover:bg-white/10 transition text-sm">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -117,4 +120,6 @@ export default function Dashboard() {
     </div>
   );
 }
+
+
 
